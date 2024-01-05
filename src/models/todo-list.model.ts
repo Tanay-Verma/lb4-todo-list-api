@@ -1,6 +1,6 @@
-import {Entity, model, property, hasMany, hasOne} from '@loopback/repository';
-import {Todo, TodoWithRelations} from './todo.model';
+import {Entity, hasMany, hasOne, model, property} from '@loopback/repository';
 import {TodoListImage} from './todo-list-image.model';
+import {Todo, TodoWithRelations} from './todo.model';
 
 @model()
 export class TodoList extends Entity {
@@ -23,10 +23,15 @@ export class TodoList extends Entity {
   color?: string;
 
   @hasMany(() => Todo)
-  todos: Todo[];
+  todos?: Todo[];
+
+  @property({
+    type: 'number',
+  })
+  todoListId?: number;
 
   @hasOne(() => TodoListImage)
-  image: TodoListImage;
+  image?: TodoListImage;
 
   constructor(data?: Partial<TodoList>) {
     super(data);
@@ -35,7 +40,7 @@ export class TodoList extends Entity {
 
 export interface TodoListRelations {
   // describe navigational properties here
-  todos?: TodoWithRelations[]
+  todos?: TodoWithRelations[];
 }
 
 export type TodoListWithRelations = TodoList & TodoListRelations;

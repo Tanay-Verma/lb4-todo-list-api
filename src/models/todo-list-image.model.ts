@@ -1,18 +1,7 @@
 import {Entity, model, property, belongsTo} from '@loopback/repository';
 import {TodoList} from './todo-list.model';
 
-@model({
-  settings: {
-    foreignKeys: {
-      fk_todoListImage_todoListId: {
-        name: 'fk_todoListImage_todoListId',
-        entity: 'TodoList',
-        entityKey: 'id',
-        foreignKey: 'todoListId',
-      },
-    },
-  },
-})
+@model()
 export class TodoListImage extends Entity {
   @property({
     type: 'number',
@@ -32,6 +21,9 @@ export class TodoListImage extends Entity {
 
   constructor(data?: Partial<TodoListImage>) {
     super(data);
+    if (typeof data?.todoListId !== 'undefined') {
+      this.todoListId = data.todoListId;
+    }
   }
 }
 

@@ -1,18 +1,7 @@
 import {Entity, belongsTo, model, property} from '@loopback/repository';
 import {TodoList, TodoListWithRelations} from './todo-list.model';
 
-@model({
-  settings: {
-    foreignKeys: {
-      fk_todo_todoListId: {
-        name: 'fk_todo_todoListId',
-        entity: 'TodoList',
-        entityKey: 'id',
-        foreignKey: 'todoListId',
-      },
-    },
-  },
-})
+@model()
 export class Todo extends Entity {
   @property({
     type: 'number',
@@ -42,6 +31,9 @@ export class Todo extends Entity {
 
   constructor(data?: Partial<Todo>) {
     super(data);
+    if (typeof data?.todoListId !== 'undefined') {
+      this.todoListId = data.todoListId;
+    }
   }
 }
 

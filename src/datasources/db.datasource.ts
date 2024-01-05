@@ -4,12 +4,12 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'db',
   connector: 'postgresql',
-  url: 'postgres://postgres:postgres@localhost/todo-list-db',
-  host: '127.0.0.1',
-  port: 5432,
-  user: 'postgres',
-  password: 'postgres',
-  database: 'todo-list-db'
+  url: 'postgresql://postgres:Slothbear@1@localhost:5432/todo-list-db',
+  host: '',
+  port: 0,
+  user: '',
+  password: '',
+  database: ''
 };
 
 // Observe application's life cycle to disconnect the datasource when
